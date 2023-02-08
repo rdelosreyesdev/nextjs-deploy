@@ -19,14 +19,15 @@ export async function getStaticPaths() {
   );
   const db = client.db();
   const meetupCollection = db.collection("meetups");
-  const meetups = await meetupCollection.find({}, { _id: 1 }).toArray(); // fetch all, id field only, to array
+  const meetups = await meetupCollection.find({}, { _id: 1 }).toArray(); 
+  //^-- fetch all, id field only, to array
   client.close();
 
   return {
     fallback: false,
     paths: meetups.map((meetup) => ({
       params: { meetupId: meetup._id.toString() },
-    })), // convert to params
+    })), // convert to path params format
   };
 }
 
@@ -40,7 +41,7 @@ export async function getStaticProps(context) {
   const meetupCollection = db.collection("meetups");
   const selectedMeetup = await meetupCollection.findOne({
     _id: new ObjectId(meetupid),
-  }); // fetch all, id field only, to array
+  }); // fetch on by id, convert value to object id for it to be searchable
   client.close();
 
   return {

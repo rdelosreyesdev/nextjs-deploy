@@ -14,6 +14,8 @@ const HomePage = (props) => {
   );
 };
 
+
+// updated na to ah
 export async function getStaticProps() {
   const client = await MongoClient.connect(
     "mongodb+srv://rdelosreyesdev:rptdr007@cluster0.lifeatf.mongodb.net/meetups?retryWrites=true&w=majority"
